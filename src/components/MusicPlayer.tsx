@@ -10,7 +10,7 @@ export default function MusicPlayer() {
       'https://cdn.pixabay.com/audio/2022/02/22/audio_d1718ab41b.mp3'
     );
     audioRef.current.loop = true;
-    audioRef.current.volume = 0.3;
+    audioRef.current.volume = 0.25;
     return () => {
       audioRef.current?.pause();
     };
@@ -28,29 +28,30 @@ export default function MusicPlayer() {
 
   return (
     <motion.button
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 1 }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 1.5 }}
       onClick={toggle}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.15 }}
       whileTap={{ scale: 0.9 }}
       style={{
         position: 'fixed',
         bottom: '24px',
         right: '24px',
         zIndex: 50,
-        width: '48px',
-        height: '48px',
+        width: '44px',
+        height: '44px',
         borderRadius: '50%',
-        background: 'var(--bg-glass)',
+        background: 'var(--bg-glass-strong)',
         backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(255,255,255,0.1)',
+        border: '1px solid rgba(255,255,255,0.08)',
         color: 'var(--pink)',
-        fontSize: '1.2rem',
+        fontSize: '1rem',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: 'var(--glow-pink)',
+        boxShadow: playing ? 'var(--glow-pink)' : 'none',
+        transition: 'box-shadow 0.3s',
       }}
       title={playing ? 'Pause music' : 'Play music'}
     >

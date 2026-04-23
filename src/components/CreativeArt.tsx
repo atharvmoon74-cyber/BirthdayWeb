@@ -6,48 +6,48 @@ export default function CreativeArt() {
   const { ref, inView } = useInView();
 
   return (
-    <section ref={ref} style={{
-      minHeight: '80vh', display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center',
-      padding: '80px 24px',
+    <section ref={ref} className="chapter" style={{
+      background: 'radial-gradient(ellipse at 50% 50%, rgba(255,154,203,0.04) 0%, transparent 50%)',
     }}>
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        style={{
-          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-          fontFamily: 'var(--font-heading)',
-          color: 'var(--pink)',
-          textShadow: 'var(--glow-pink)',
-          textAlign: 'center',
-          marginBottom: '48px',
-        }}
+        transition={{ duration: 0.8 }}
+        className="chapter-title"
       >
         Art of Us
       </motion.h2>
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ delay: 0.3 }}
+        className="chapter-subtitle"
+      >
+        Visual stories of our friendship
+      </motion.p>
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-        gap: '20px',
-        maxWidth: '800px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: '16px',
+        maxWidth: '750px',
         width: '100%',
       }}>
         {ART_PIECES.map((art, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.15 * i }}
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(255,154,203,0.2)' }}
+            transition={{ delay: 0.15 * i, duration: 0.7 }}
+            whileHover={{ scale: 1.06, y: -6, boxShadow: '0 0 40px rgba(255,154,203,0.15)' }}
             style={{
               borderRadius: 'var(--radius)',
               overflow: 'hidden',
-              border: '1px solid rgba(255,255,255,0.1)',
+              border: '1px solid rgba(255,255,255,0.06)',
             }}
           >
             <div style={{
-              height: '160px',
+              height: '140px',
               background: art.gradient,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               position: 'relative',
@@ -55,39 +55,40 @@ export default function CreativeArt() {
             }}>
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+                transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
                 style={{
-                  width: '60px', height: '60px',
-                  border: '2px solid rgba(255,255,255,0.3)',
+                  width: '50px', height: '50px',
+                  border: '2px solid rgba(255,255,255,0.2)',
                   borderRadius: '50%',
                 }}
               />
               <motion.div
-                animate={{ scale: [1, 1.3, 1] }}
-                transition={{ duration: 3, repeat: Infinity }}
+                animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity }}
                 style={{
                   position: 'absolute',
-                  width: '20px', height: '20px',
+                  width: '16px', height: '16px',
                   borderRadius: '50%',
-                  background: 'rgba(255,255,255,0.3)',
+                  background: 'rgba(255,255,255,0.25)',
                 }}
               />
             </div>
             <div style={{
               padding: '16px',
-              background: 'var(--bg-glass)',
+              background: 'var(--bg-glass-strong)',
               backdropFilter: 'blur(20px)',
             }}>
               <h3 style={{
                 fontFamily: 'var(--font-heading)',
-                color: 'var(--pink)', fontSize: '1.2rem',
+                color: 'var(--pink)', fontSize: '1.15rem',
                 marginBottom: '6px',
+                textShadow: 'var(--glow-pink)',
               }}>
                 {art.title}
               </h3>
               <p style={{
                 color: 'var(--text-secondary)',
-                fontSize: '0.85rem', lineHeight: 1.5,
+                fontSize: '0.8rem', lineHeight: 1.5, fontWeight: 300,
               }}>
                 {art.description}
               </p>

@@ -10,10 +10,10 @@ export default function HiddenSurprise() {
   const handleClick = () => {
     setClicked(true);
     confetti({
-      particleCount: 150,
-      spread: 70,
+      particleCount: 180,
+      spread: 80,
       origin: { y: 0.6 },
-      colors: ['#ff9acb', '#a78bfa', '#ffc4e0', '#c4b5fd'],
+      colors: ['#ff9acb', '#a78bfa', '#ffc4e0', '#c4b5fd', '#fbbf24'],
     });
   };
 
@@ -30,7 +30,7 @@ export default function HiddenSurprise() {
       >
         {!clicked ? (
           <motion.button
-            whileHover={{ scale: 1.1, boxShadow: '0 0 30px rgba(255,154,203,0.5)' }}
+            whileHover={{ scale: 1.12, boxShadow: '0 0 40px rgba(255,154,203,0.5)' }}
             whileTap={{ scale: 0.9 }}
             onClick={handleClick}
             style={{
@@ -41,6 +41,7 @@ export default function HiddenSurprise() {
               fontSize: '1.1rem',
               fontWeight: 600,
               boxShadow: 'var(--glow-pink)',
+              animation: 'pulse-glow 3s infinite',
             }}
           >
             Don't click this
@@ -51,10 +52,10 @@ export default function HiddenSurprise() {
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               style={{
-                background: 'var(--bg-glass)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255,154,203,0.3)',
-                borderRadius: 'var(--radius)',
+                background: 'var(--bg-glass-strong)',
+                backdropFilter: 'blur(30px)',
+                border: '1px solid rgba(255,154,203,0.2)',
+                borderRadius: 'var(--radius-lg)',
                 padding: '40px 32px',
                 maxWidth: '400px',
               }}
@@ -62,10 +63,11 @@ export default function HiddenSurprise() {
               <p style={{
                 fontSize: '1.5rem', fontFamily: 'var(--font-heading)',
                 color: 'var(--pink)', marginBottom: '12px',
+                textShadow: 'var(--glow-pink)',
               }}>
                 You clicked it!
               </p>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontWeight: 300 }}>
                 I knew you could not resist! That curiosity is exactly what makes you amazing. Never lose that spark!
               </p>
             </motion.div>

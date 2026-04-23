@@ -8,56 +8,54 @@ export default function PhotoGallery() {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <section ref={ref} style={{
-      minHeight: '100vh', display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center',
-      padding: '80px 24px',
+    <section ref={ref} className="chapter" style={{
+      background: 'radial-gradient(ellipse at 50% 80%, rgba(255,154,203,0.06) 0%, transparent 50%)',
     }}>
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        style={{
-          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-          fontFamily: 'var(--font-heading)',
-          color: 'var(--pink)',
-          textShadow: 'var(--glow-pink)',
-          textAlign: 'center',
-          marginBottom: '16px',
-        }}
+        transition={{ duration: 0.8 }}
+        className="chapter-title"
       >
-        Our Memories
+        Memories
       </motion.h2>
       <motion.p
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.2 }}
-        style={{ color: 'var(--text-secondary)', marginBottom: '48px', textAlign: 'center' }}
+        transition={{ delay: 0.3 }}
+        className="chapter-subtitle"
       >
         Every picture tells a story
       </motion.p>
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-        gap: '20px',
-        maxWidth: '900px',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+        gap: '16px',
+        maxWidth: '850px',
         width: '100%',
       }}>
         {GALLERY_IMAGES.map((img, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 30 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 * i }}
-            whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(255,154,203,0.3)' }}
+            initial={{ opacity: 0, y: 40, scale: 0.9 }}
+            animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ delay: 0.12 * i, duration: 0.7 }}
+            whileHover={{
+              scale: 1.06,
+              boxShadow: '0 0 40px rgba(255,154,203,0.25)',
+              zIndex: 2,
+            }}
             onClick={() => setSelected(i)}
             style={{
               cursor: 'pointer',
               borderRadius: 'var(--radius)',
               overflow: 'hidden',
-              background: 'var(--bg-glass)',
-              border: '1px solid rgba(255,255,255,0.1)',
-              padding: '12px 12px 8px',
+              background: 'var(--bg-glass-strong)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255,255,255,0.06)',
+              padding: '10px 10px 6px',
+              position: 'relative',
             }}
           >
             <img
@@ -65,13 +63,14 @@ export default function PhotoGallery() {
               alt={img.caption}
               loading="lazy"
               style={{
-                width: '100%', height: '180px', objectFit: 'cover',
+                width: '100%', height: '170px', objectFit: 'cover',
                 borderRadius: 'var(--radius-sm)',
+                transition: 'transform 0.5s',
               }}
             />
             <p style={{
-              fontSize: '0.85rem', color: 'var(--text-secondary)',
-              marginTop: '8px', textAlign: 'center',
+              fontSize: '0.8rem', color: 'var(--text-secondary)',
+              marginTop: '8px', textAlign: 'center', fontWeight: 300,
             }}>
               {img.caption}
             </p>
@@ -88,21 +87,23 @@ export default function PhotoGallery() {
             onClick={() => setSelected(null)}
             style={{
               position: 'fixed', inset: 0, zIndex: 200,
-              background: 'rgba(0,0,0,0.85)',
+              background: 'rgba(8,5,16,0.92)',
+              backdropFilter: 'blur(30px)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               padding: '24px',
             }}
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.7, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
+              exit={{ scale: 0.7, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 80 }}
               onClick={e => e.stopPropagation()}
               style={{
-                maxWidth: '600px', width: '100%',
-                background: 'var(--bg-glass)',
-                backdropFilter: 'blur(20px)',
-                borderRadius: 'var(--radius)',
+                maxWidth: '550px', width: '100%',
+                background: 'var(--bg-glass-strong)',
+                backdropFilter: 'blur(30px)',
+                borderRadius: 'var(--radius-lg)',
                 border: '1px solid rgba(255,255,255,0.1)',
                 overflow: 'hidden',
               }}
@@ -110,25 +111,35 @@ export default function PhotoGallery() {
               <img
                 src={GALLERY_IMAGES[selected].src}
                 alt={GALLERY_IMAGES[selected].caption}
-                style={{ width: '100%', maxHeight: '60vh', objectFit: 'cover' }}
+                style={{ width: '100%', maxHeight: '55vh', objectFit: 'cover' }}
               />
-              <p style={{
-                padding: '20px', textAlign: 'center',
-                color: 'var(--text-secondary)', fontSize: '1.1rem',
-              }}>
-                {GALLERY_IMAGES[selected].caption}
-              </p>
-              <button
-                onClick={() => setSelected(null)}
-                style={{
-                  display: 'block', margin: '0 auto 20px',
-                  padding: '8px 24px', borderRadius: '50px',
-                  background: 'var(--pink)', color: '#fff',
-                  fontSize: '0.9rem', fontWeight: 600,
-                }}
-              >
-                Close
-              </button>
+              <div style={{ padding: '24px', textAlign: 'center' }}>
+                <p style={{
+                  color: 'var(--text-primary)',
+                  fontSize: '1.05rem',
+                  marginBottom: '8px',
+                  fontWeight: 500,
+                }}>
+                  {GALLERY_IMAGES[selected].caption}
+                </p>
+                <p style={{
+                  color: 'var(--text-muted)',
+                  fontSize: '0.85rem',
+                  fontStyle: 'italic',
+                }}>
+                  {GALLERY_IMAGES[selected].overlay}
+                </p>
+                <button
+                  onClick={() => setSelected(null)}
+                  style={{
+                    marginTop: '20px', padding: '10px 28px',
+                    borderRadius: '50px', background: 'var(--pink)',
+                    color: '#fff', fontSize: '0.85rem', fontWeight: 600,
+                  }}
+                >
+                  Close
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         )}

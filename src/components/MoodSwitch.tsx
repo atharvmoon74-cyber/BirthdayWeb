@@ -12,41 +12,34 @@ export default function MoodSwitch() {
       padding: '80px 24px',
     }}>
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        style={{
-          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-          fontFamily: 'var(--font-heading)',
-          color: 'var(--pink)',
-          textShadow: 'var(--glow-pink)',
-          textAlign: 'center',
-          marginBottom: '16px',
-        }}
+        transition={{ duration: 0.8 }}
+        className="chapter-title"
       >
         Mood Switch
       </motion.h2>
       <motion.p
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
-        style={{ color: 'var(--text-secondary)', marginBottom: '32px', textAlign: 'center' }}
+        transition={{ delay: 0.3 }}
+        className="chapter-subtitle"
       >
         How are you feeling right now?
       </motion.p>
 
       <div style={{ display: 'flex', gap: '16px' }}>
         <motion.button
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
-          onClick={toggle}
+          onClick={() => mood === 'funny' && toggle()}
           style={{
-            padding: '16px 32px',
+            padding: '16px 36px',
             borderRadius: '50px',
             background: mood === 'romantic'
               ? 'linear-gradient(135deg, var(--pink), var(--purple))'
               : 'var(--bg-glass)',
-            border: mood === 'romantic'
-              ? '1px solid rgba(255,154,203,0.5)'
-              : '1px solid rgba(255,255,255,0.1)',
+            border: `1px solid ${mood === 'romantic' ? 'rgba(255,154,203,0.4)' : 'rgba(255,255,255,0.06)'}`,
             color: '#fff',
             fontSize: '1rem',
             fontWeight: 600,
@@ -56,18 +49,16 @@ export default function MoodSwitch() {
           Romantic Mode
         </motion.button>
         <motion.button
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
-          onClick={toggle}
+          onClick={() => mood === 'romantic' && toggle()}
           style={{
-            padding: '16px 32px',
+            padding: '16px 36px',
             borderRadius: '50px',
             background: mood === 'funny'
               ? 'linear-gradient(135deg, #fbbf24, #34d399)'
               : 'var(--bg-glass)',
-            border: mood === 'funny'
-              ? '1px solid rgba(251,191,36,0.5)'
-              : '1px solid rgba(255,255,255,0.1)',
+            border: `1px solid ${mood === 'funny' ? 'rgba(251,191,36,0.4)' : 'rgba(255,255,255,0.06)'}`,
             color: '#fff',
             fontSize: '1rem',
             fontWeight: 600,
@@ -81,12 +72,11 @@ export default function MoodSwitch() {
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
+        transition={{ delay: 0.5 }}
         style={{
-          marginTop: '24px',
+          marginTop: '20px',
           color: 'var(--text-muted)',
-          fontSize: '0.85rem',
-          textAlign: 'center',
+          fontSize: '0.8rem',
         }}
       >
         {mood === 'romantic'

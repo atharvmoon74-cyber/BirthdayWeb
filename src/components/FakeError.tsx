@@ -8,8 +8,8 @@ export default function FakeError() {
 
   useEffect(() => {
     if (inView && phase === 0) {
-      const t1 = setTimeout(() => setPhase(1), 2000);
-      const t2 = setTimeout(() => setPhase(2), 3500);
+      const t1 = setTimeout(() => setPhase(1), 2500);
+      const t2 = setTimeout(() => setPhase(2), 4000);
       return () => { clearTimeout(t1); clearTimeout(t2); };
     }
   }, [inView, phase]);
@@ -24,14 +24,14 @@ export default function FakeError() {
         {phase === 0 && (
           <motion.div
             key="error"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
             style={{
-              background: 'var(--bg-glass)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(239,68,68,0.3)',
-              borderRadius: 'var(--radius)',
+              background: 'var(--bg-glass-strong)',
+              backdropFilter: 'blur(30px)',
+              border: '1px solid rgba(239,68,68,0.2)',
+              borderRadius: 'var(--radius-lg)',
               padding: '48px 40px',
               textAlign: 'center',
               maxWidth: '500px',
@@ -44,14 +44,14 @@ export default function FakeError() {
               Error 404
             </p>
             <p style={{
-              fontSize: '1.2rem', color: 'var(--text-secondary)',
-              marginBottom: '8px',
+              fontSize: '1.1rem', color: 'var(--text-secondary)',
+              marginBottom: '8px', fontWeight: 300,
             }}>
               Too much cuteness detected
             </p>
             <div style={{
-              width: '100%', height: '4px',
-              background: 'rgba(255,255,255,0.1)',
+              width: '100%', height: '3px',
+              background: 'rgba(255,255,255,0.06)',
               borderRadius: '2px',
               marginTop: '16px',
               overflow: 'hidden',
@@ -59,7 +59,7 @@ export default function FakeError() {
               <motion.div
                 initial={{ width: '0%' }}
                 animate={{ width: '100%' }}
-                transition={{ duration: 2 }}
+                transition={{ duration: 2.5 }}
                 style={{
                   height: '100%',
                   background: 'linear-gradient(90deg, var(--pink), var(--purple))',
@@ -79,9 +79,9 @@ export default function FakeError() {
             style={{ textAlign: 'center' }}
           >
             <motion.p
-              animate={{ opacity: [0.5, 1, 0.5] }}
+              animate={{ opacity: [0.4, 1, 0.4] }}
               transition={{ duration: 1, repeat: Infinity }}
-              style={{ color: 'var(--purple)', fontSize: '1.1rem' }}
+              style={{ color: 'var(--purple)', fontSize: '1rem', fontWeight: 300 }}
             >
               Recalibrating cuteness levels...
             </motion.p>
@@ -94,10 +94,10 @@ export default function FakeError() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             style={{
-              background: 'var(--bg-glass)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255,154,203,0.3)',
-              borderRadius: 'var(--radius)',
+              background: 'var(--bg-glass-strong)',
+              backdropFilter: 'blur(30px)',
+              border: '1px solid rgba(255,154,203,0.2)',
+              borderRadius: 'var(--radius-lg)',
               padding: '40px 32px',
               textAlign: 'center',
               maxWidth: '500px',
@@ -106,10 +106,11 @@ export default function FakeError() {
             <p style={{
               fontSize: '1.5rem', fontFamily: 'var(--font-heading)',
               color: 'var(--pink)', marginBottom: '12px',
+              textShadow: 'var(--glow-pink)',
             }}>
               Cuteness overload resolved!
             </p>
-            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6, fontWeight: 300 }}>
               Just kidding! Your cuteness is off the charts and there is no fix for that. And honestly? I would not have it any other way.
             </p>
           </motion.div>

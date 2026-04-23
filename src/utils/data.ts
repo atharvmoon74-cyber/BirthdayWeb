@@ -4,22 +4,31 @@ export const FRIENDSHIP_START = new Date('2025-11-01T00:00:00');
 
 export const SECRET_ANSWER = 'instagram';
 
+export const CHAT_MESSAGES = [
+  { sender: 'her', text: 'Hey! I saw your post, that photo from Tirupati is amazing!', time: 'Nov 2025, 9:42 PM' },
+  { sender: 'me', text: 'Thank you! Your Banaras photos are incredible too!', time: '9:43 PM' },
+  { sender: 'her', text: 'Haha thanks! Photography is my therapy', time: '9:44 PM' },
+  { sender: 'me', text: 'Same here! Nothing beats capturing moments', time: '9:44 PM' },
+  { sender: 'her', text: 'We should share our favorite shots sometime!', time: '9:45 PM' },
+  { sender: 'me', text: 'Absolutely! This is going to be fun', time: '9:46 PM' },
+];
+
 export const TIMELINE_EVENTS = [
-  { year: 'Nov 2025', title: 'We Met on Instagram', text: 'Just a simple message, but somehow it turned into something endless.', image: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=400' },
-  { year: 'Nov 2025', title: 'First Random Conversation', text: 'From a random text to something that felt like we had known each other forever.', image: 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=400' },
-  { year: 'Dec 2025', title: 'From Strangers to Close Friends', text: 'Somewhere between late-night chats and shared stories, strangers became family.', image: 'https://images.pexels.com/photos/1252869/pexels-photo-1252869.jpeg?auto=compress&cs=tinysrgb&w=400' },
-  { year: 'Jan 2026', title: 'Sharing Photos — Banaras & IIT Tirupati', text: 'You capturing moments in Banaras, me capturing moments in IIT Tirupati. Different places, same connection.', image: 'https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=400' },
-  { year: 'Feb 2026', title: 'Endless Conversations Begin', text: 'From random talks to daily conversations — we just never ran out of things to say.', image: 'https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&w=400' },
-  { year: 'Jun 2026', title: 'Still Going Strong', text: '8 months and counting. What started small became something really special.', image: 'https://images.pexels.com/photos/1199957/pexels-photo-1199957.jpeg?auto=compress&cs=tinysrgb&w=400' },
+  { year: 'Nov 2025', title: 'We Met on Instagram', text: 'Just a simple message, but somehow it turned into something endless.', image: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=400', then: 'Strangers on the internet', now: 'Best friends for life' },
+  { year: 'Nov 2025', title: 'First Random Conversation', text: 'From a random text to something that felt like we had known each other forever.', image: 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=400', then: 'Awkward first messages', now: 'Can not stop talking' },
+  { year: 'Dec 2025', title: 'From Strangers to Close Friends', text: 'Somewhere between late-night chats and shared stories, strangers became family.', image: 'https://images.pexels.com/photos/1252869/pexels-photo-1252869.jpeg?auto=compress&cs=tinysrgb&w=400', then: 'Getting to know each other', now: 'Know each other better than anyone' },
+  { year: 'Jan 2026', title: 'Sharing Photos — Banaras & IIT Tirupati', text: 'You capturing moments in Banaras, me capturing moments in IIT Tirupati. Different places, same connection.', image: 'https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=400', then: 'Sharing our first photos', now: 'Our shared gallery of life' },
+  { year: 'Feb 2026', title: 'Endless Conversations Begin', text: 'From random talks to daily conversations — we just never ran out of things to say.', image: 'https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&w=400', then: 'Occasional chats', now: 'Daily conversations' },
+  { year: 'Jun 2026', title: 'Still Going Strong', text: '8 months and counting. What started small became something really special.', image: 'https://images.pexels.com/photos/1199957/pexels-photo-1199957.jpeg?auto=compress&cs=tinysrgb&w=400', then: 'Beginning of our story', now: 'Still writing our story' },
 ];
 
 export const GALLERY_IMAGES = [
-  { src: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Her photos in Banaras' },
-  { src: 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'My photos from IIT Tirupati' },
-  { src: 'https://images.pexels.com/photos/1252869/pexels-photo-1252869.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Different places... same connection' },
-  { src: 'https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Her capturing moments in Banaras' },
-  { src: 'https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Me capturing moments in IIT Tirupati' },
-  { src: 'https://images.pexels.com/photos/1199957/pexels-photo-1199957.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Shared pieces of our lives' },
+  { src: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Her photos in Banaras', overlay: 'Capturing the soul of the city' },
+  { src: 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'My photos from IIT Tirupati', overlay: 'Moments from campus life' },
+  { src: 'https://images.pexels.com/photos/1252869/pexels-photo-1252869.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Different places... same connection', overlay: 'Distance never mattered' },
+  { src: 'https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Her capturing moments in Banaras', overlay: 'Through her lens' },
+  { src: 'https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Me capturing moments in IIT Tirupati', overlay: 'Through my lens' },
+  { src: 'https://images.pexels.com/photos/1199957/pexels-photo-1199957.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Shared pieces of our lives', overlay: 'Our story in frames' },
 ];
 
 export const MEMORY_QUESTIONS = [
@@ -77,18 +86,18 @@ export const STAR_MEMORIES = [
   { x: 45, y: 80, memory: 'Still going strong, 8 months and counting' },
 ];
 
+export const PLATFORM_JOURNEY = [
+  { name: 'Threads', icon: '@', color: '#000000', bg: 'rgba(0,0,0,0.3)', description: 'Where it all started — that first random message that changed everything.' },
+  { name: 'Instagram', icon: 'IG', color: '#E1306C', bg: 'rgba(225,48,108,0.15)', description: 'Our main place. Where we shared photos, stories, and pieces of our lives.' },
+  { name: 'WhatsApp', icon: 'WA', color: '#25D366', bg: 'rgba(37,211,102,0.15)', description: 'Daily conversations, voice notes, and the real talks happened here.' },
+  { name: 'Telegram', icon: 'TG', color: '#0088CC', bg: 'rgba(0,136,204,0.15)', description: 'Our latest spot. Still talking, still sharing, still going strong.' },
+];
+
 export const JOURNEY_PLACES = [
   { x: 15, y: 40, name: 'Threads', memory: 'Where it all started — that first random message that changed everything.' },
   { x: 35, y: 25, name: 'Instagram', memory: 'Our main place. Where we shared photos, stories, and pieces of our lives.' },
   { x: 55, y: 45, name: 'WhatsApp', memory: 'Daily conversations, voice notes, and the real talks happened here.' },
   { x: 75, y: 30, name: 'Telegram', memory: 'Our latest spot. Still talking, still sharing, still going strong.' },
-];
-
-export const PLATFORM_JOURNEY = [
-  { name: 'Threads', icon: '@', color: '#000', description: 'Where it all started' },
-  { name: 'Instagram', icon: 'IG', color: '#E1306C', description: 'Where we connected' },
-  { name: 'WhatsApp', icon: 'WA', color: '#25D366', description: 'Where we got closer' },
-  { name: 'Telegram', icon: 'TG', color: '#0088CC', description: 'Where we still talk' },
 ];
 
 export const THINGS_I_NEVER_SAID = [
@@ -115,3 +124,38 @@ export const THANK_YOU_MESSAGE = [
   'For being a part of my life when I needed someone the most.',
   'You truly mean a lot to me.',
 ];
+
+export const COMPLIMENTS = [
+  'You have the most beautiful smile in the world',
+  'Your kindness is contagious',
+  'You light up every room you walk into',
+  'Your laugh is my favorite sound',
+  'You make the world a better place just by being in it',
+  'Your creativity inspires everyone around you',
+  'You are stronger than you think',
+  'Your friendship is the best gift I have ever received',
+];
+
+export const TREE_MEMORIES = [
+  { id: 0, text: 'That first message on Instagram', type: 'root' },
+  { id: 1, text: 'Our first real conversation', type: 'root' },
+  { id: 2, text: 'Sharing photos — Banaras & IIT Tirupati', type: 'trunk' },
+  { id: 3, text: 'Late night talks that never ended', type: 'trunk' },
+  { id: 4, text: 'You were always there when I needed you', type: 'branch' },
+  { id: 5, text: 'Never left me behind', type: 'branch' },
+  { id: 6, text: 'Our shared love for photography', type: 'branch' },
+  { id: 7, text: 'Every laugh we shared', type: 'leaf' },
+  { id: 8, text: 'Every moment of silence that was comfortable', type: 'leaf' },
+  { id: 9, text: 'Every time you made me smile without trying', type: 'leaf' },
+  { id: 10, text: 'Golden: You are the best thing that happened to me', type: 'golden' },
+];
+
+export const THOUGHT_BUBBLES = [
+  'What if that first message never happened?',
+  'What if we had scrolled past each other?',
+  'What if we never clicked that follow button?',
+  'But we did. And everything changed.',
+];
+
+
+export { FRIEND_NAME }

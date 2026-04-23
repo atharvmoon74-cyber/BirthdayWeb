@@ -23,6 +23,8 @@ export default function CursorTrail() {
       ctx.save();
       ctx.globalAlpha = alpha;
       ctx.fillStyle = '#ff9acb';
+      ctx.shadowColor = '#ff9acb';
+      ctx.shadowBlur = 8;
       ctx.beginPath();
       const s = size;
       ctx.moveTo(x, y + s / 4);
@@ -37,14 +39,14 @@ export default function CursorTrail() {
     const onMouseMove = (e: MouseEvent) => {
       const dx = e.clientX - lastX;
       const dy = e.clientY - lastY;
-      if (Math.sqrt(dx * dx + dy * dy) > 20) {
+      if (Math.sqrt(dx * dx + dy * dy) > 25) {
         hearts.push({
           x: e.clientX,
           y: e.clientY,
-          alpha: 0.6,
-          size: 8 + Math.random() * 6,
-          vx: (Math.random() - 0.5) * 2,
-          vy: -Math.random() * 2 - 1,
+          alpha: 0.5,
+          size: 7 + Math.random() * 5,
+          vx: (Math.random() - 0.5) * 1.5,
+          vy: -Math.random() * 1.5 - 0.5,
         });
         lastX = e.clientX;
         lastY = e.clientY;
@@ -59,7 +61,7 @@ export default function CursorTrail() {
         const h = hearts[i];
         h.x += h.vx;
         h.y += h.vy;
-        h.alpha -= 0.015;
+        h.alpha -= 0.012;
         if (h.alpha <= 0) {
           hearts.splice(i, 1);
           continue;

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 
-export function useInView(threshold = 0.15) {
+export function useInView(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -42,24 +42,6 @@ export function useTypingEffect(text: string, speed = 50, startDelay = 0) {
   return { displayed, done };
 }
 
-export function useCounter(target: number, duration = 2000, start = false) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    if (!start) return;
-    let startTime: number;
-    const step = (ts: number) => {
-      if (!startTime) startTime = ts;
-      const progress = Math.min((ts - startTime) / duration, 1);
-      setCount(Math.floor(progress * target));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [target, duration, start]);
-
-  return count;
-}
-
 export function useMood() {
   const [mood, setMood] = useState<'romantic' | 'funny'>('romantic');
 
@@ -72,4 +54,22 @@ export function useMood() {
   }, []);
 
   return { mood, toggle };
+}
+
+export function useParallax(speed = 0.3) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      const scrolled = window.innerHeight / 2 - rect.top;
+      setOffset(scrolled * speed);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [speed]);
+
+  return { ref, offset };
 }

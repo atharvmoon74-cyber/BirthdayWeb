@@ -13,39 +13,31 @@ export default function ShortStory() {
   const { ref, inView } = useInView();
 
   return (
-    <section ref={ref} style={{
-      minHeight: '100vh', display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center',
-      padding: '80px 24px',
-      background: 'radial-gradient(ellipse at top, rgba(255,154,203,0.08) 0%, transparent 60%)',
+    <section ref={ref} className="chapter" style={{
+      background: 'radial-gradient(ellipse at top, rgba(255,154,203,0.06) 0%, transparent 50%)',
     }}>
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        style={{
-          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-          fontFamily: 'var(--font-heading)',
-          color: 'var(--pink)',
-          textShadow: 'var(--glow-pink)',
-          textAlign: 'center',
-          marginBottom: '48px',
-        }}
+        transition={{ duration: 0.8 }}
+        className="chapter-title"
       >
         Our Story
       </motion.h2>
-      <div style={{ maxWidth: '700px', width: '100%' }}>
+      <div style={{ maxWidth: '680px', width: '100%' }}>
         {paragraphs.map((p, i) => (
           <motion.p
             key={i}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 * i, duration: 0.8 }}
+            transition={{ delay: 0.25 * i, duration: 0.8 }}
             style={{
-              fontSize: 'clamp(1rem, 2vw, 1.15rem)',
+              fontSize: 'clamp(1rem, 2.2vw, 1.15rem)',
               color: 'var(--text-secondary)',
-              lineHeight: 1.8,
-              marginBottom: '24px',
+              lineHeight: 1.9,
+              marginBottom: '28px',
               textAlign: 'center',
+              fontWeight: 300,
             }}
           >
             {p}

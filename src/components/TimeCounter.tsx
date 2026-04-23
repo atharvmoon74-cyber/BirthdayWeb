@@ -29,70 +29,64 @@ export default function TimeCounter() {
   ];
 
   return (
-    <section ref={ref} style={{
-      minHeight: '80vh', display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center',
-      padding: '80px 24px',
+    <section ref={ref} className="chapter" style={{
+      background: 'radial-gradient(ellipse at 50% 50%, rgba(167,139,250,0.08) 0%, transparent 60%)',
     }}>
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        style={{
-          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-          fontFamily: 'var(--font-heading)',
-          color: 'var(--pink)',
-          textShadow: 'var(--glow-pink)',
-          textAlign: 'center',
-          marginBottom: '16px',
-        }}
+        transition={{ duration: 0.8 }}
+        className="chapter-title"
       >
-        How Long We Have Known Each Other
+        Every Second Counts
       </motion.h2>
       <motion.p
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.2 }}
-        style={{ color: 'var(--text-secondary)', marginBottom: '48px', textAlign: 'center' }}
+        transition={{ delay: 0.3 }}
+        className="chapter-subtitle"
       >
-        Every second counts when it is with you
+        Since November 2025, our story has been writing itself
       </motion.p>
+
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
         gap: '16px',
-        maxWidth: '600px',
+        maxWidth: '560px',
         width: '100%',
       }}>
         {units.map((u, i) => (
           <motion.div
             key={u.label}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 * i }}
+            transition={{ delay: 0.15 * i, duration: 0.6 }}
             style={{
-              background: 'var(--bg-glass)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255,255,255,0.1)',
+              background: 'var(--bg-glass-strong)',
+              backdropFilter: 'blur(30px)',
+              border: '1px solid rgba(255,255,255,0.08)',
               borderRadius: 'var(--radius)',
-              padding: '24px 16px',
+              padding: '28px 16px',
               textAlign: 'center',
             }}
           >
             <div style={{
-              fontSize: 'clamp(2rem, 5vw, 3rem)',
+              fontSize: 'clamp(2.2rem, 6vw, 3.2rem)',
               fontWeight: 700,
               color: 'var(--purple)',
               fontFamily: 'var(--font-body)',
               textShadow: 'var(--glow-purple)',
+              letterSpacing: '2px',
             }}>
               {String(u.value).padStart(u.label === 'Days' ? 1 : 2, '0')}
             </div>
             <div style={{
-              fontSize: '0.85rem',
+              fontSize: '0.7rem',
               color: 'var(--text-muted)',
               marginTop: '8px',
               textTransform: 'uppercase',
-              letterSpacing: '2px',
+              letterSpacing: '3px',
             }}>
               {u.label}
             </div>
