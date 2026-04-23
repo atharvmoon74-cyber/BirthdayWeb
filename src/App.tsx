@@ -20,6 +20,7 @@ import VoiceMessage from './components/VoiceMessage';
 import CreativeArt from './components/CreativeArt';
 import ThingsINeverSaid from './components/ThingsINeverSaid';
 import PuzzleUnlock from './components/PuzzleUnlock';
+import ThankYou from './components/ThankYou';
 import FinalEnding from './components/FinalEnding';
 import MusicPlayer from './components/MusicPlayer';
 import CursorTrail from './components/CursorTrail';
@@ -57,6 +58,7 @@ export default function App() {
             <CreativeArt />
             <ThingsINeverSaid />
             <PuzzleUnlock />
+            <ThankYou />
             <FinalEnding />
           </main>
         </>

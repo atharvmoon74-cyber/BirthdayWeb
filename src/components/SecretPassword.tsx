@@ -55,10 +55,10 @@ export default function SecretPassword() {
           }}
         >
           <p style={{ color: 'var(--text-secondary)', marginBottom: '8px' }}>
-            What is my favorite color?
+            Where did we first meet?
           </p>
           <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '20px' }}>
-            (Hint: It is the color of the sky on a clear day)
+            (Hint: The app where it all started)
           </p>
           <div style={{ display: 'flex', gap: '8px' }}>
             <input

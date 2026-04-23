@@ -2,10 +2,11 @@ import { motion } from 'framer-motion';
 import { useInView } from '../hooks/useAnimations';
 
 const paragraphs = [
-  'Some people enter your life and everything changes. Not with fireworks or grand announcements, but with a quiet kind of magic that you only notice when you look back.',
-  'That is what happened with you. One random day, one random conversation, and suddenly the world had more color in it. The jokes were funnier, the sun was warmer, and the hard days felt a little less impossible.',
-  'You did not just become my friend. You became the person I want to share every good news with, every bad day with, every random thought at 2 AM with.',
-  'This is not just a birthday page. This is a love letter to the friendship that saved me, shaped me, and made me believe that the best things in life are the people beside you.',
+  'We met randomly… just a simple message, but somehow it turned into something endless.',
+  'It all started in November 2025 on Instagram, when you texted first.',
+  'From random talks to daily conversations… from strangers to someone I can\'t imagine my days without.',
+  'You capturing moments in Banaras… Me capturing moments in IIT Tirupati… And somehow, we kept sharing pieces of our lives with each other.',
+  'What started small… became something really special.',
 ];
 
 export default function ShortStory() {
@@ -30,7 +31,7 @@ export default function ShortStory() {
           marginBottom: '48px',
         }}
       >
-        A Story About You
+        Our Story
       </motion.h2>
       <div style={{ maxWidth: '700px', width: '100%' }}>
         {paragraphs.map((p, i) => (

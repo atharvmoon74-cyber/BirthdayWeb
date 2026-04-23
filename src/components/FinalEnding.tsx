@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { useInView } from '../hooks/useAnimations';
+import { FRIEND_NAME } from '../utils/data';
 
 const LINES = [
-  'Out of all the people in this world...',
-  'Through every laugh and every tear...',
-  'Through every moment, big and small...',
-  'I am lucky I found you.',
-  'Happy Birthday!',
+  'Out of all the random moments in life...',
+  'Through every message, every photo, every conversation...',
+  'Through Banaras and IIT Tirupati...',
+  'I am really glad I found you.',
+  `Happy Birthday ${FRIEND_NAME}!`,
 ];
 
 export default function FinalEnding() {
