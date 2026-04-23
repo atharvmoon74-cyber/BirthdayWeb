@@ -156,6 +156,3 @@ export const THOUGHT_BUBBLES = [
   'What if we never clicked that follow button?',
   'But we did. And everything changed.',
 ];
-
-
-export { FRIEND_NAME }
