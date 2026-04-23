@@ -5,7 +5,8 @@ import { TIMELINE_EVENTS } from '../utils/data';
 
 export default function Timeline() {
   const { ref, inView } = useInView();
-  const [sliderIdx, setSliderIdx] = useState<number | null>(null);
+  const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+  const [sliderValues, setSliderValues] = useState<Record<number, number>>({});
 
   return (
     <section ref={ref} className="chapter" style={{
@@ -40,7 +41,7 @@ export default function Timeline() {
             background: 'linear-gradient(to bottom, var(--pink), var(--purple), var(--pink))',
             transformOrigin: 'top',
             transform: 'translateX(-50%)',
-            opacity: 0.25,
+            opacity: 0.2,
           }}
         />
 
@@ -61,7 +62,7 @@ export default function Timeline() {
             <div style={{ flex: 1, textAlign: i % 2 === 0 ? 'right' : 'left' }}>
               <motion.div
                 whileHover={{ scale: 1.03, boxShadow: '0 0 30px rgba(255,154,203,0.15)' }}
-                onClick={() => setSliderIdx(sliderIdx === i ? null : i)}
+                onClick={() => setExpandedIdx(expandedIdx === i ? null : i)}
                 style={{
                   background: 'var(--bg-glass-strong)',
                   backdropFilter: 'blur(30px)',
@@ -70,7 +71,7 @@ export default function Timeline() {
                   padding: '24px',
                   display: 'inline-block',
                   textAlign: 'left',
-                  maxWidth: '280px',
+                  maxWidth: '300px',
                   cursor: 'pointer',
                   transition: 'box-shadow 0.3s',
                 }}
@@ -98,7 +99,7 @@ export default function Timeline() {
                 </p>
 
                 {/* Then vs Now slider */}
-                {sliderIdx === i && (
+                {expandedIdx === i && (
                   <motion.div
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
@@ -108,10 +109,56 @@ export default function Timeline() {
                       borderTop: '1px solid rgba(255,255,255,0.06)',
                     }}
                   >
-                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', flex: 1 }}>{event.then}</span>
-                      <span style={{ color: 'var(--pink)', fontSize: '0.8rem' }}>&#8594;</span>
-                      <span style={{ fontSize: '0.75rem', color: 'var(--purple)', flex: 1, textAlign: 'right' }}>{event.now}</span>
+                    <div style={{ marginBottom: '8px' }}>
+                      <div style={{
+                        display: 'flex', justifyContent: 'space-between',
+                        fontSize: '0.7rem', color: 'var(--text-muted)',
+                        marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '1px',
+                      }}>
+                        <span>Then</span>
+                        <span>Now</span>
+                      </div>
+                      <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={sliderValues[i] ?? 0}
+                        onChange={e => setSliderValues(prev => ({ ...prev, [i]: parseInt(e.target.value) }))}
+                        style={{
+                          width: '100%',
+                          accentColor: 'var(--pink)',
+                          cursor: 'pointer',
+                          height: '4px',
+                        }}
+                      />
+                      <div style={{
+                        display: 'flex', justifyContent: 'space-between',
+                        marginTop: '6px',
+                      }}>
+                        <motion.span
+                          animate={{ opacity: 1 - (sliderValues[i] ?? 0) / 100 }}
+                          style={{
+                            fontSize: '0.75rem',
+                            color: 'var(--text-muted)',
+                            maxWidth: '45%',
+                            transition: 'opacity 0.3s',
+                          }}
+                        >
+                          {event.then}
+                        </motion.span>
+                        <motion.span
+                          animate={{ opacity: (sliderValues[i] ?? 0) / 100 }}
+                          style={{
+                            fontSize: '0.75rem',
+                            color: 'var(--purple)',
+                            textAlign: 'right',
+                            maxWidth: '45%',
+                            transition: 'opacity 0.3s',
+                          }}
+                        >
+                          {event.now}
+                        </motion.span>
+                      </div>
                     </div>
                   </motion.div>
                 )}

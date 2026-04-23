@@ -23,12 +23,9 @@ export const TIMELINE_EVENTS = [
 ];
 
 export const GALLERY_IMAGES = [
-  { src: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Her photos in Banaras', overlay: 'Capturing the soul of the city' },
-  { src: 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'My photos from IIT Tirupati', overlay: 'Moments from campus life' },
-  { src: 'https://images.pexels.com/photos/1252869/pexels-photo-1252869.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Different places... same connection', overlay: 'Distance never mattered' },
-  { src: 'https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Her capturing moments in Banaras', overlay: 'Through her lens' },
-  { src: 'https://images.pexels.com/photos/167699/pexels-photo-167699.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Me capturing moments in IIT Tirupati', overlay: 'Through my lens' },
-  { src: 'https://images.pexels.com/photos/1199957/pexels-photo-1199957.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Shared pieces of our lives', overlay: 'Our story in frames' },
+  { src: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Her photos in Banaras', overlay: 'Capturing the soul of the city', placeholder: true },
+  { src: 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'My photos from IIT Tirupati', overlay: 'Moments from campus life', placeholder: true },
+  { src: 'https://images.pexels.com/photos/1252869/pexels-photo-1252869.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Different places... same connection', overlay: 'Distance never mattered', placeholder: true },
 ];
 
 export const MEMORY_QUESTIONS = [
@@ -155,4 +152,53 @@ export const THOUGHT_BUBBLES = [
   'What if we had scrolled past each other?',
   'What if we never clicked that follow button?',
   'But we did. And everything changed.',
+];
+
+export const LYRIC_CAPTIONS = [
+  { text: 'Some moments feel like forever...', delay: 3000 },
+  { text: 'Some people become home...', delay: 12000 },
+  { text: 'And somehow... you became mine to cherish.', delay: 25000 },
+  { text: 'Every conversation was a bridge...', delay: 40000 },
+  { text: 'Every photo, a shared world...', delay: 55000 },
+  { text: 'You were always there...', delay: 70000 },
+  { text: 'And I am grateful... always.', delay: 85000 },
+];
+
+export const MYSTERY_BOXES = [
+  {
+    id: 1,
+    title: 'Thoughts',
+    icon: '\u{1F4AD}',
+    color: 'var(--purple)',
+    glowColor: 'rgba(167,139,250,0.4)',
+    thoughts: [
+      'I think about how different my life would be without you.',
+      'I think about how a random message became the most important thing.',
+      'I think about how you never gave up on me.',
+    ],
+  },
+  {
+    id: 2,
+    title: 'Feelings',
+    icon: '\u{1F54A}\u{FE0F}',
+    color: 'var(--pink)',
+    glowColor: 'rgba(255,154,203,0.4)',
+    thoughts: [
+      'I feel safe when I talk to you.',
+      'I feel like I can be myself — completely.',
+      'I feel grateful every single day.',
+    ],
+  },
+  {
+    id: 3,
+    title: 'Growth',
+    icon: '\u{1F338}',
+    color: 'var(--emerald)',
+    glowColor: 'rgba(52,211,153,0.4)',
+    thoughts: [
+      'From one small moment... grew something beautiful.',
+      'Our roots are deep, our branches reach far.',
+      'And this tree? It is still growing.',
+    ],
+  },
 ];

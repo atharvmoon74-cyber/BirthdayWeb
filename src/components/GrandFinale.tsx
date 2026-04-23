@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { useInView } from '../hooks/useAnimations';
+import { useMusic } from './MusicPlayer';
 import { FRIEND_NAME } from '../utils/data';
 
 const LINES = [
@@ -13,13 +14,21 @@ const LINES = [
 
 export default function GrandFinale() {
   const { ref, inView } = useInView();
+  const { fadeOut } = useMusic();
+  const [phase, setPhase] = useState<'pause' | 'lines' | 'final'>('pause');
   const [visibleLines, setVisibleLines] = useState(0);
-  const [showFinal, setShowFinal] = useState(false);
   const [celebrated, setCelebrated] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
+  // Black screen pause then start lines
   useEffect(() => {
     if (!inView) return;
+    const t1 = setTimeout(() => setPhase('lines'), 2000);
+    return () => clearTimeout(t1);
+  }, [inView]);
+
+  // Reveal lines one by one
+  useEffect(() => {
+    if (phase !== 'lines') return;
     const interval = setInterval(() => {
       setVisibleLines(prev => {
         if (prev < LINES.length) return prev + 1;
@@ -28,26 +37,30 @@ export default function GrandFinale() {
       });
     }, 2500);
     return () => clearInterval(interval);
-  }, [inView]);
+  }, [phase]);
 
+  // Show final after all lines
   useEffect(() => {
-    if (visibleLines === LINES.length && !showFinal) {
-      const timeout = setTimeout(() => setShowFinal(true), 1500);
+    if (visibleLines === LINES.length && phase === 'lines') {
+      const timeout = setTimeout(() => {
+        setPhase('final');
+        fadeOut();
+      }, 1500);
       return () => clearTimeout(timeout);
     }
-  }, [visibleLines, showFinal]);
+  }, [visibleLines, phase, fadeOut]);
 
+  // Fireworks on final
   useEffect(() => {
-    if (showFinal && !celebrated) {
+    if (phase === 'final' && !celebrated) {
       setCelebrated(true);
 
-      // Fireworks forming name effect
-      const duration = 5000;
+      const duration = 6000;
       const end = Date.now() + duration;
 
       const frame = () => {
         confetti({
-          particleCount: 4,
+          particleCount: 5,
           angle: 60 + Math.random() * 60,
           spread: 55 + Math.random() * 20,
           origin: { x: Math.random() * 0.6 + 0.2, y: Math.random() * 0.3 + 0.2 },
@@ -55,14 +68,13 @@ export default function GrandFinale() {
           gravity: 0.8,
           scalar: 1.2,
         });
-
         if (Date.now() < end) requestAnimationFrame(frame);
       };
       frame();
 
       // Second wave
       setTimeout(() => {
-        const end2 = Date.now() + 3000;
+        const end2 = Date.now() + 4000;
         const frame2 = () => {
           confetti({
             particleCount: 3,
@@ -76,25 +88,57 @@ export default function GrandFinale() {
         };
         frame2();
       }, 2000);
+
+      // Third wave - name fireworks
+      setTimeout(() => {
+        const end3 = Date.now() + 3000;
+        const frame3 = () => {
+          confetti({
+            particleCount: 6,
+            startVelocity: 25,
+            spread: 360,
+            origin: { x: 0.5, y: 0.4 },
+            colors: ['#ff9acb', '#ffc4e0', '#a78bfa'],
+            gravity: 0.5,
+            scalar: 1.5,
+          });
+          if (Date.now() < end3) requestAnimationFrame(frame3);
+        };
+        frame3();
+      }, 3500);
     }
-  }, [showFinal, celebrated]);
+  }, [phase, celebrated]);
 
   return (
     <section ref={ref} style={{
       minHeight: '100vh', display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
       padding: '100px 24px',
-      background: 'linear-gradient(180deg, #050310 0%, #0a0618 40%, #0d0820 100%)',
+      background: '#050310',
       position: 'relative',
       overflow: 'hidden',
     }}>
-      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 5 }} />
-
-      {/* Soft particles falling */}
       <MemoryParticles />
 
+      <AnimatePresence mode="wait">
+        {phase === 'pause' && (
+          <motion.div
+            key="pause"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            style={{
+              position: 'absolute', inset: 0,
+              background: '#050310',
+              zIndex: 10,
+            }}
+          />
+        )}
+      </AnimatePresence>
+
       <div style={{ textAlign: 'center', maxWidth: '600px', position: 'relative', zIndex: 10 }}>
-        {LINES.map((line, i) => (
+        {(phase === 'lines' || phase === 'final') && LINES.map((line, i) => (
           <motion.p
             key={i}
             initial={{ opacity: 0, y: 25 }}
@@ -114,7 +158,7 @@ export default function GrandFinale() {
         ))}
 
         <AnimatePresence>
-          {showFinal && (
+          {phase === 'final' && (
             <motion.div
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -142,7 +186,7 @@ export default function GrandFinale() {
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1 }}
+                transition={{ delay: 1.5 }}
                 whileHover={{ scale: 1.05, boxShadow: '0 0 30px rgba(255,154,203,0.4)' }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -167,7 +211,7 @@ export default function GrandFinale() {
 }
 
 function MemoryParticles() {
-  const particles = Array.from({ length: 25 }, (_, i) => ({
+  const particles = Array.from({ length: 30 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     delay: Math.random() * 15,

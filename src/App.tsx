@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import CinematicEntry from './components/CinematicEntry';
 import HeroSection from './components/HeroSection';
 import HowItStarted from './components/HowItStarted';
@@ -21,8 +22,59 @@ import EmotionalDepth from './components/EmotionalDepth';
 import FinalUnlock from './components/FinalUnlock';
 import ThankYou from './components/ThankYou';
 import GrandFinale from './components/GrandFinale';
-import MusicPlayer from './components/MusicPlayer';
+import MusicPlayer, { MusicProvider, useMusic } from './components/MusicPlayer';
 import CursorTrail from './components/CursorTrail';
+
+const CHAPTERS = [
+  { id: 'hero', component: HeroSection, phase: 'intro' as const },
+  { id: 'started', component: HowItStarted, phase: 'intro' as const },
+  { id: 'time', component: TimeCounter, phase: 'intro' as const },
+  { id: 'story', component: ShortStory, phase: 'warm' as const },
+  { id: 'timeline', component: Timeline, phase: 'warm' as const },
+  { id: 'gallery', component: PhotoGallery, phase: 'warm' as const },
+  { id: 'fun', component: FunMoments, phase: 'warm' as const },
+  { id: 'who', component: WhoSheIs, phase: 'warm' as const },
+  { id: 'letters', component: LettersFeelings, phase: 'emotional' as const },
+  { id: 'stars', component: StarMap, phase: 'emotional' as const },
+  { id: 'journey', component: JourneyMap, phase: 'emotional' as const },
+  { id: 'mood', component: MoodSwitch, phase: 'warm' as const },
+  { id: 'surprise', component: HiddenSurprise, phase: 'warm' as const },
+  { id: 'error', component: FakeError, phase: 'warm' as const },
+  { id: 'voice', component: VoiceMessage, phase: 'emotional' as const },
+  { id: 'art', component: CreativeArt, phase: 'emotional' as const },
+  { id: 'mystery', component: MysteryBox, phase: 'emotional' as const },
+  { id: 'depth', component: EmotionalDepth, phase: 'emotional' as const },
+  { id: 'unlock', component: FinalUnlock, phase: 'finale' as const },
+  { id: 'thanks', component: ThankYou, phase: 'finale' as const },
+  { id: 'finale', component: GrandFinale, phase: 'finale' as const },
+];
+
+function MusicPhaseSync() {
+  const { setPhase } = useMusic();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const chapter = CHAPTERS.find(c => c.id === entry.target.id);
+            if (chapter) setPhase(chapter.phase);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    CHAPTERS.forEach(c => {
+      const el = document.getElementById(c.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [setPhase]);
+
+  return null;
+}
 
 export default function App() {
   const [started, setStarted] = useState(false);
@@ -32,75 +84,29 @@ export default function App() {
       {!started && <CinematicEntry onBegin={() => setStarted(true)} />}
 
       {started && (
-        <>
+        <MusicProvider>
           <CursorTrail />
           <MusicPlayer />
+          <MusicPhaseSync />
 
           <main>
-            {/* Chapter 2 - Hero */}
-            <HeroSection />
-
-            {/* Chapter 2 - How It Started */}
-            <HowItStarted />
-
-            {/* Time Counter */}
-            <TimeCounter />
-
-            {/* Short Story */}
-            <ShortStory />
-
-            {/* Chapter 3 - The Journey */}
-            <Timeline />
-
-            {/* Chapter 4 - Memories */}
-            <PhotoGallery />
-
-            {/* Chapter 5 - Fun Moments */}
-            <FunMoments />
-
-            {/* Chapter 6 - Who She Is */}
-            <WhoSheIs />
-
-            {/* Chapter 7 - Letters & Feelings */}
-            <LettersFeelings />
-
-            {/* Star Map */}
-            <StarMap />
-
-            {/* Chapter 8 - Journey Map */}
-            <JourneyMap />
-
-            {/* Mood Switch */}
-            <MoodSwitch />
-
-            {/* Hidden Surprise */}
-            <HiddenSurprise />
-
-            {/* Fake Error */}
-            <FakeError />
-
-            {/* Voice Message */}
-            <VoiceMessage />
-
-            {/* Creative Art */}
-            <CreativeArt />
-
-            {/* Chapter 9 - The Mystery Box */}
-            <MysteryBox />
-
-            {/* Chapter 10 - Emotional Depth */}
-            <EmotionalDepth />
-
-            {/* Chapter 11 - Final Unlock */}
-            <FinalUnlock />
-
-            {/* Thank You */}
-            <ThankYou />
-
-            {/* Chapter 12 - Grand Finale */}
-            <GrandFinale />
+            {CHAPTERS.map((chapter) => {
+              const Comp = chapter.component;
+              return (
+                <motion.div
+                  key={chapter.id}
+                  id={chapter.id}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true, margin: '-10%' }}
+                  transition={{ duration: 0.8 }}
+                >
+                  <Comp />
+                </motion.div>
+              );
+            })}
           </main>
-        </>
+        </MusicProvider>
       )}
     </>
   );
