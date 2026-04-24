@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { useInView } from '../hooks/useAnimations';
-import { useMusic } from './MusicPlayer';
 import { FRIEND_NAME } from '../utils/data';
-
+import { useMusic } from "./MusicPlayer";
 const LINES = [
   'Out of all the random moments in life...',
   'Through every message, every photo, every conversation...',
@@ -14,7 +13,7 @@ const LINES = [
 
 export default function GrandFinale() {
   const { ref, inView } = useInView();
-  const { fadeOut } = useMusic();
+  
   const [phase, setPhase] = useState<'pause' | 'lines' | 'final'>('pause');
   const [visibleLines, setVisibleLines] = useState(0);
   const [celebrated, setCelebrated] = useState(false);
@@ -25,7 +24,11 @@ export default function GrandFinale() {
     const t1 = setTimeout(() => setPhase('lines'), 2000);
     return () => clearTimeout(t1);
   }, [inView]);
+const { playMusic } = useMusic();
 
+useEffect(() => {
+  playMusic();
+}, []);
   // Reveal lines one by one
   useEffect(() => {
     if (phase !== 'lines') return;
@@ -48,7 +51,7 @@ export default function GrandFinale() {
       }, 1500);
       return () => clearTimeout(timeout);
     }
-  }, [visibleLines, phase, fadeOut]);
+  }, [visibleLines, phase]);
 
   // Fireworks on final
   useEffect(() => {

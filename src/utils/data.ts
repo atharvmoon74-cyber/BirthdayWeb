@@ -21,13 +21,23 @@ export const TIMELINE_EVENTS = [
   { year: 'Feb 2026', title: 'Endless Conversations Begin', text: 'From random talks to daily conversations — we just never ran out of things to say.', image: 'https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&w=400', then: 'Occasional chats', now: 'Daily conversations' },
   { year: 'Jun 2026', title: 'Still Going Strong', text: '8 months and counting. What started small became something really special.', image: 'https://images.pexels.com/photos/1199957/pexels-photo-1199957.jpeg?auto=compress&cs=tinysrgb&w=400', then: 'Beginning of our story', now: 'Still writing our story' },
 ];
-
 export const GALLERY_IMAGES = [
-  { src: 'https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Her photos in Banaras', overlay: 'Capturing the soul of the city', placeholder: true },
-  { src: 'https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'My photos from IIT Tirupati', overlay: 'Moments from campus life', placeholder: true },
-  { src: 'https://images.pexels.com/photos/1252869/pexels-photo-1252869.jpeg?auto=compress&cs=tinysrgb&w=400', caption: 'Different places... same connection', overlay: 'Distance never mattered', placeholder: true },
+  {
+    src: "/photo1.jpg",
+    caption: "Yeh wali tere bhai ki story se li thi",
+    overlay: "Happist moment ever"
+  },
+  {
+    src: "/photo2.jpg",
+    caption: "Cuteness overload Pookie",
+    overlay: "Happiest Birthday to the cutest soul I know"
+  },
+  {
+    src: "/photo3.jpg",
+    caption: "Muh chupa le bas",
+    overlay: "Always there when I needed you, even when I was being a little brat"
+  }
 ];
-
 export const MEMORY_QUESTIONS = [
   { hint: 'Where did we first meet?', options: ['Instagram', 'Facebook', 'Threads', 'Telegram'], answer: 0, reveal: 'That first message on Instagram started everything. Best random text ever!' },
   { hint: 'What connects us the most?', options: ['Music', 'Photography', 'Cooking', 'Gaming'], answer: 1, reveal: 'We both love photography! That shared passion connects us in such a special way.' },

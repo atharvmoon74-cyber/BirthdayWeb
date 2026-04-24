@@ -22,7 +22,7 @@ import EmotionalDepth from './components/EmotionalDepth';
 import FinalUnlock from './components/FinalUnlock';
 import ThankYou from './components/ThankYou';
 import GrandFinale from './components/GrandFinale';
-import MusicPlayer, { MusicProvider, useMusic } from './components/MusicPlayer';
+import { MusicProvider } from "./components/MusicPlayer";
 import CursorTrail from './components/CursorTrail';
 
 const CHAPTERS = [
@@ -86,8 +86,7 @@ export default function App() {
       {started && (
         <MusicProvider>
           <CursorTrail />
-          <MusicPlayer />
-          <MusicPhaseSync />
+        
 
           <main>
             {CHAPTERS.map((chapter) => {
