@@ -23,17 +23,17 @@ export const TIMELINE_EVENTS = [
 ];
 export const GALLERY_IMAGES = [
   {
-    src: "/photo1.jpg",
+    src: "photo1.jpg",
     caption: "Yeh wali tere bhai ki story se li thi",
     overlay: "Happist moment ever"
   },
   {
-    src: "/photo2.jpg",
+    src: "photo2.jpg",
     caption: "Cuteness overload Pookie",
     overlay: "Happiest Birthday to the cutest soul I know"
   },
   {
-    src: "/photo3.jpg",
+    src: "photo3.jpg",
     caption: "Muh chupa le bas",
     overlay: "Always there when I needed you, even when I was being a little brat"
   }

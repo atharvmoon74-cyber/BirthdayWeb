@@ -1,5 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+
+import { MusicProvider } from './components/MusicPlayer'; // ✅ IMPORTANT
+
 import CinematicEntry from './components/CinematicEntry';
 import HeroSection from './components/HeroSection';
 import HowItStarted from './components/HowItStarted';
@@ -22,71 +25,46 @@ import EmotionalDepth from './components/EmotionalDepth';
 import FinalUnlock from './components/FinalUnlock';
 import ThankYou from './components/ThankYou';
 import GrandFinale from './components/GrandFinale';
-import { MusicProvider } from "./components/MusicPlayer";
 import CursorTrail from './components/CursorTrail';
 
+// ✅ CLEAN chapters
 const CHAPTERS = [
-  { id: 'hero', component: HeroSection, phase: 'intro' as const },
-  { id: 'started', component: HowItStarted, phase: 'intro' as const },
-  { id: 'time', component: TimeCounter, phase: 'intro' as const },
-  { id: 'story', component: ShortStory, phase: 'warm' as const },
-  { id: 'timeline', component: Timeline, phase: 'warm' as const },
-  { id: 'gallery', component: PhotoGallery, phase: 'warm' as const },
-  { id: 'fun', component: FunMoments, phase: 'warm' as const },
-  { id: 'who', component: WhoSheIs, phase: 'warm' as const },
-  { id: 'letters', component: LettersFeelings, phase: 'emotional' as const },
-  { id: 'stars', component: StarMap, phase: 'emotional' as const },
-  { id: 'journey', component: JourneyMap, phase: 'emotional' as const },
-  { id: 'mood', component: MoodSwitch, phase: 'warm' as const },
-  { id: 'surprise', component: HiddenSurprise, phase: 'warm' as const },
-  { id: 'error', component: FakeError, phase: 'warm' as const },
-  { id: 'voice', component: VoiceMessage, phase: 'emotional' as const },
-  { id: 'art', component: CreativeArt, phase: 'emotional' as const },
-  { id: 'mystery', component: MysteryBox, phase: 'emotional' as const },
-  { id: 'depth', component: EmotionalDepth, phase: 'emotional' as const },
-  { id: 'unlock', component: FinalUnlock, phase: 'finale' as const },
-  { id: 'thanks', component: ThankYou, phase: 'finale' as const },
-  { id: 'finale', component: GrandFinale, phase: 'finale' as const },
+  { id: 'hero', component: HeroSection },
+  { id: 'started', component: HowItStarted },
+  { id: 'time', component: TimeCounter },
+  { id: 'story', component: ShortStory },
+  { id: 'timeline', component: Timeline },
+  { id: 'gallery', component: PhotoGallery },
+  { id: 'fun', component: FunMoments },
+  { id: 'who', component: WhoSheIs },
+  { id: 'letters', component: LettersFeelings },
+  { id: 'stars', component: StarMap },
+  { id: 'journey', component: JourneyMap },
+  { id: 'mood', component: MoodSwitch },
+  { id: 'surprise', component: HiddenSurprise },
+  { id: 'error', component: FakeError },
+  { id: 'voice', component: VoiceMessage },
+  { id: 'art', component: CreativeArt },
+  { id: 'mystery', component: MysteryBox },
+  { id: 'depth', component: EmotionalDepth },
+  { id: 'unlock', component: FinalUnlock },
+  { id: 'thanks', component: ThankYou },
+  { id: 'finale', component: GrandFinale },
 ];
-
-function MusicPhaseSync() {
-  const { setPhase } = useMusic();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const chapter = CHAPTERS.find(c => c.id === entry.target.id);
-            if (chapter) setPhase(chapter.phase);
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
-
-    CHAPTERS.forEach(c => {
-      const el = document.getElementById(c.id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [setPhase]);
-
-  return null;
-}
 
 export default function App() {
   const [started, setStarted] = useState(false);
 
   return (
-    <>
+    <MusicProvider> {/* 🔥 FIX: wrap EVERYTHING */}
+
+      {/* Entry screen */}
       {!started && <CinematicEntry onBegin={() => setStarted(true)} />}
 
+      {/* Main website */}
       {started && (
-        <MusicProvider>
+        <>
           <CursorTrail />
-        
 
           <main>
             {CHAPTERS.map((chapter) => {
@@ -105,8 +83,9 @@ export default function App() {
               );
             })}
           </main>
-        </MusicProvider>
+        </>
       )}
-    </>
+
+    </MusicProvider>
   );
 }
